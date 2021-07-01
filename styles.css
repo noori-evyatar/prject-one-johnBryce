@@ -14,7 +14,7 @@ body {
 }
 
 .title {
-    margin: 7%;
+    margin: 5%;
     font-size: 120px;
     text-align: center;
 }
@@ -22,15 +22,8 @@ body {
 .btn btn-success {
     justify-content: center;
     align-self: auto;
-
+    margin: 30%;
 }
-
-.taskWrapper {
-    height: 500px;
-    width: 750px;
-}
-
-
 
 .taskDetails {
     height: 190px;
@@ -42,7 +35,7 @@ body {
     overflow-x: hidden;
     white-space: pre-wrap;
     margin-bottom: 5px;
-    padding-left: 14%;
+    padding-left: 10%;
     padding-top: 2%;
     padding-bottom: 2%;
     box-shadow: 10px 10px 40px 0px rgb(0, 0, 0, 0.75);
@@ -67,22 +60,84 @@ body {
 
 .notesContainer {
     display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 10%;
     align-items: center;
-    flex-direction: row;
     justify-content: center;
-    
 }
 
 .newNote {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-self: auto;
+    align-items: center;
     background-image: url("./assets/notebg.png");
     height: 250px;
     width: 200px;
+    outline: none;
+    border: none;
+    margin-left: 55px;
+    margin-right: 55px;
+    margin-bottom: 45px;
+    animation: fadeIn 4.8s;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+.taskTitle {
+    margin: 15px;
+    padding-top: 5%;
     overflow: auto;
     overflow-x: auto;
     word-wrap: break-word;
     overflow-x: hidden;
     white-space: pre-wrap;
-  
+    padding-left: 5%;
+    padding-right: 5%;
+    height: 50px;
+    width: 180px;
+    font-size: 22px;
+
+}
+
+.taskDetail {
+    overflow: auto;
+    overflow-x: auto;
+    word-wrap: break-word;
+    overflow-x: hidden;
+    white-space: pre-wrap;
+    padding-left: 5%;
+    padding-right: 15%;
+    height: 120px;
+    width: 180px;
+    font-size: 16px;
+}
+
+.dateSet {
+    font-size: 15px;
+    margin-right: 110px;
+}
+
+.timeSet {
+    font-size: 15px;
+    margin-right: 150px;
+}
+
+.deleteButton {
+    width: 16px;
+    height: 16px;
+    background-color: transparent;
+    border: none;
+    fill: currentColor;
+    position: absolute;
+    margin-left: 9%;
+    margin-bottom: 200px;
 }

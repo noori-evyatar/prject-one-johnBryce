@@ -10,17 +10,16 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Architects+Daughter">
     <title>Evyatar's Task Board!</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 </head>
 
 <body>
 
     <h1 class="title">My Task Board!</h1>
     <div class="taskWrapper">
-        <div class="container1">
-            <input class="btn btn-success" type="button" id="addTaskBtn" data-toggle="collapse" data-target="#taskForm"
-                aria-expanded="false" aria-controls="taskForm" onclick="changeBtnText()" value="Add Task">
-            </input>
-        </div>
+        <input class="btn btn-success" type="button" id="addTaskBtn" data-toggle="collapse" data-target="#taskForm"
+            aria-expanded="false" aria-controls="taskForm" onclick="changeBtnText()" value="Add Task">
+        </input>
         <div class="collapse" id="taskForm">
             <input type="text" class="taskName" id="taskName" placeholder="Task Name">
             <textarea class="taskDetails" id="taskDetails" placeholder="Write your task here"></textarea>
@@ -30,14 +29,15 @@
                     <input id="taskTime" type="time" />
                 </div>
                 <div class="buttons">
-                    <button class="btn btn-info" id="saveTaskInput" onclick="saveTask()">Save</button>
-                    <button class="btn btn-info" id="clearFormInput" onclick="clearForm()">Clear</button>
+                    <button class="btn btn-info" id="saveTaskInput" >Save</button>
+                    <button class="btn btn-info" id="clearFormInput" onclick="clearTheForm()">Clear</button>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <div id="tasksContainer" class="notesContainer"></div>
+
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
