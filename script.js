@@ -1,4 +1,15 @@
-console.log(localStorage);
+let currentNotes = [];
+init();
+function init() {
+    const tasksFromLocalStorage = localStorage.getItem("notes");
+    if (tasksFromLocalStorage) {
+        currentNotes = JSON.parse(tasksFromLocalStorage);
+        console.log(currentNotes);
+    }
+    for (i = 0; i < currentNotes.length; i++) {
+        createNote(currentNotes[i])
+    }
+}
 
 function changeBtnText() {
     var text = document.getElementById("addTaskBtn");
@@ -23,14 +34,14 @@ function saveTask() {
         taskDate,
         taskTime
     }
-    // if (validateText()) {
-    //     createNote(savedInput);
-    //     localStorage.setItem(taskId, JSON.stringify(savedInput));
-    // }
-    // clearTheForm();
-    // document.getElementById("taskForm").className = "collapse-show";
+    if (!validateText()) {
+        return;
+    }
+    clearTheForm();
+
     createNote(savedInput);
-        localStorage.setItem(taskId, JSON.stringify(savedInput));
+    currentNotes.push(savedInput);
+    localStorage.setItem("notes", JSON.stringify(currentNotes));
 };
 
 var clearForm = document.getElementById("clearFormInput");
@@ -56,17 +67,17 @@ function createNote(savedInput) {
     var notesContainer = document.getElementById("tasksContainer");
 
     var newNote = document.createElement("div");
-    newNote.setAttribute("id", savedInput.id);
+    newNote.setAttribute("id", savedInput.taskId);
     newNote.setAttribute("class", "newNote");
-    newNote.addEventListener("mouseover", showDltBtn);
-    newNote.addEventListener("mouseleave", dontShowDltBtn);
+    newNote.addEventListener("mouseover",()=> showDltBtn(savedInput.taskId));
+    newNote.addEventListener("mouseleave",()=>  dontShowDltBtn(savedInput.taskId));
     notesContainer.appendChild(newNote);
 
     var deleteIcon = document.createElement("button");
     deleteIcon.setAttribute("id", "deleteButton");
     deleteIcon.setAttribute("class", "deleteButton");
     var icon = document.createElement("i");
-    icon.setAttribute("id", "deleteIconId");
+    icon.setAttribute("id", `deleteIconId-${savedInput.taskId}`);
     icon.setAttribute("class", "bi bi-trash");
     deleteIcon.append(icon);
     icon.style.display = "none";
@@ -99,19 +110,25 @@ function createNote(savedInput) {
 
 }
 
-function dontShowDltBtn() {
-    document.getElementById("deleteIconId").style.display = "none";
+
+
+function dontShowDltBtn(taskId) {
+    document.getElementById(`deleteIconId-${taskId}`).style.display = "none";
 }
 
-function showDltBtn() {
-    document.getElementById("deleteIconId").style.display = "block";
+function showDltBtn(taskId) {
+    document.getElementById(`deleteIconId-${taskId}`).style.display = "block";
 }
 
 function deleteNote(deleteTask) {
+    const id = deleteTask.parentNode.getAttribute("id");
     deleteTask.parentNode.remove();
-    var id = deleteTask.getAttribute("id");
-    localStorage.removeItem(id);
+    console.log(id);
+    const updatedNotes = currentNotes.filter((note) => {
+        return `${note.taskId}` !== id;
+    })
 
+    localStorage.setItem("notes", JSON.stringify(updatedNotes));
 }
 
 function validateText() {
@@ -129,24 +146,28 @@ function validateText() {
     if (!taskNameObject.value) {
         taskNameObject.style.borderColor = 'red';
         alert("Task Name is missing!");
+        return;
     }
 
     if (!taskDetailsObject.value) {
         taskDetailsObject.style.borderColor = 'red';
         alert("Task Details are missing!");
+        return;
     }
 
     if (!taskDateObject.value) {
         taskDateObject.style.borderColor = 'red';
         alert("Date is missing!");
+        return;
     }
 
     if (!taskTimeObject.value) {
         taskTimeObject.style.borderColor = 'red';
         alert("Time is missing!");
+        return;
     }
     else
-        return;
+        return true;
 
 }
 

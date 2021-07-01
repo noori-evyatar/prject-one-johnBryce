@@ -79,7 +79,7 @@ body {
     margin-left: 55px;
     margin-right: 55px;
     margin-bottom: 45px;
-    animation: fadeIn 4.8s;
+    animation: fadeIn 1.4s;
 }
 
 @keyframes fadeIn {
