@@ -16,18 +16,18 @@ function changeBtnText() {
     text.value == "Add Task" ? text.value = "Close" : text.value = "Add Task";
 };
 
-var savedTask = document.getElementById("saveTaskInput");
+let savedTask = document.getElementById("saveTaskInput");
 savedTask.addEventListener("click", function () {
     saveTask();
 })
 
 function saveTask() {
-    var taskName = document.getElementById("taskName").value;
-    var taskDetails = document.getElementById("taskDetails").value;
-    var taskDate = document.getElementById("taskDate").value;
-    var taskTime = document.getElementById("taskTime").value;
-    var taskId = Math.floor(Math.random() * 10000);
-    var savedInput = {
+    let taskName = document.getElementById("taskName").value;
+    let taskDetails = document.getElementById("taskDetails").value;
+    let taskDate = document.getElementById("taskDate").value;
+    let taskTime = document.getElementById("taskTime").value;
+    let taskId = Math.floor(Math.random() * 10000);
+    let savedInput = {
         taskId,
         taskName,
         taskDetails,
@@ -47,16 +47,16 @@ function saveTask() {
 
 };
 
-var clearFormElement = document.getElementById("clearFormInput");
+let clearFormElement = document.getElementById("clearFormInput");
 clearFormElement.addEventListener("click", function () {
     clearForm();
 })
 
 function clearForm() {
-    var taskName = document.getElementById("taskName");
-    var taskDetails = document.getElementById("taskDetails");
-    var taskDate = document.getElementById("taskDate");
-    var taskTime = document.getElementById("taskTime");
+    let taskName = document.getElementById("taskName");
+    let taskDetails = document.getElementById("taskDetails");
+    let taskDate = document.getElementById("taskDate");
+    let taskTime = document.getElementById("taskTime");
 
     taskName.value = "";
     taskDetails.value = "";
@@ -67,19 +67,19 @@ function clearForm() {
 
 function createNote(savedInput) {
 
-    var notesContainer = document.getElementById("tasksContainer");
+    let notesContainer = document.getElementById("tasksContainer");
 
-    var newNote = document.createElement("div");
+    let newNote = document.createElement("div");
     newNote.setAttribute("id", savedInput.taskId);
     newNote.setAttribute("class", "newNote");
     newNote.addEventListener("mouseover", () => showDltBtn(savedInput.taskId));
     newNote.addEventListener("mouseleave", () => dontShowDltBtn(savedInput.taskId));
     notesContainer.appendChild(newNote);
 
-    var deleteIcon = document.createElement("button");
+    let deleteIcon = document.createElement("button");
     deleteIcon.setAttribute("id", "deleteButton");
     deleteIcon.setAttribute("class", "deleteButton");
-    var icon = document.createElement("i");
+    let icon = document.createElement("i");
     icon.setAttribute("id", `deleteIconId-${savedInput.taskId}`);
     icon.setAttribute("class", "bi bi-trash");
     
@@ -88,7 +88,7 @@ function createNote(savedInput) {
     deleteIcon.append(icon);
     newNote.append(deleteIcon);
 
-    var taskTitle = document.createElement("h2");
+    let taskTitle = document.createElement("h2");
     taskTitle.setAttribute("id", "title");
     taskTitle.setAttribute("class", "taskTitle");
     taskTitle.innerText = savedInput.taskName;
@@ -97,19 +97,19 @@ function createNote(savedInput) {
     let titleAndDltBtnDiv = document.createElement("div");
     newNote.append(titleAndDltBtnDiv);
 
-    var taskDetail = document.createElement("p");
+    let taskDetail = document.createElement("p");
     taskDetail.setAttribute("id", "deatails");
     taskDetail.setAttribute("class", "taskDetail");
     newNote.append(taskDetail);
     taskDetail.innerText = savedInput.taskDetails;
 
-    var dateSet = document.createElement("div");
+    let dateSet = document.createElement("div");
     dateSet.setAttribute("id", "date");
     dateSet.setAttribute("class", "dateSet");
     newNote.append(dateSet);
     dateSet.innerText = savedInput.taskDate;
 
-    var timeSet = document.createElement("div");
+    let timeSet = document.createElement("div");
     timeSet.setAttribute("id", "time");
     timeSet.setAttribute("class", "timeSet");
     newNote.append(timeSet);
