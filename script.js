@@ -82,9 +82,10 @@ function createNote(savedInput) {
     var icon = document.createElement("i");
     icon.setAttribute("id", `deleteIconId-${savedInput.taskId}`);
     icon.setAttribute("class", "bi bi-trash");
-    deleteIcon.append(icon);
+    
     icon.style.display = "none";
     deleteIcon.setAttribute("onclick", "deleteNote(this)");
+    deleteIcon.append(icon);
     newNote.append(deleteIcon);
 
     var taskTitle = document.createElement("h2");
@@ -129,12 +130,15 @@ function showDltBtn(taskId) {
 function deleteNote(deleteTask) {
     const id = deleteTask.parentNode.getAttribute("id");
     deleteTask.parentNode.remove();
-    console.log(id);
-    console.log(deleteTask.parentNode);
+    console.log("id: " + id);
+    console.log("deleteTask.parentNode: " + deleteTask.parentNode);
     const updatedNotes = currentNotes.filter((note) => {
         return `${note.taskId}` !== id;
     })
-
+    currentNotes = currentNotes.filter((note) => {
+        return `${note.taskId}` !== id;
+    })
+    console.log("updatedNotes: " + updatedNotes);
     localStorage.setItem("notes", JSON.stringify(updatedNotes));
 }
 
