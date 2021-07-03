@@ -12,7 +12,7 @@ function init() {
 }
 
 function changeBtnText() {
-    var text = document.getElementById("addTaskBtn");
+    let text = document.getElementById("addTaskBtn");
     text.value == "Add Task" ? text.value = "Close" : text.value = "Add Task";
 };
 
@@ -37,19 +37,22 @@ function saveTask() {
     if (!validateText()) {
         return;
     }
-    clearTheForm();
+    clearForm();
 
     createNote(savedInput);
     currentNotes.push(savedInput);
     localStorage.setItem("notes", JSON.stringify(currentNotes));
+    document.getElementById("taskForm").className += "collapse";
+    changeBtnText();
+
 };
 
-var clearForm = document.getElementById("clearFormInput");
-clearForm.addEventListener("click", function () {
-    clearTheForm();
+var clearFormElement = document.getElementById("clearFormInput");
+clearFormElement.addEventListener("click", function () {
+    clearForm();
 })
 
-function clearTheForm() {
+function clearForm() {
     var taskName = document.getElementById("taskName");
     var taskDetails = document.getElementById("taskDetails");
     var taskDate = document.getElementById("taskDate");
@@ -69,8 +72,8 @@ function createNote(savedInput) {
     var newNote = document.createElement("div");
     newNote.setAttribute("id", savedInput.taskId);
     newNote.setAttribute("class", "newNote");
-    newNote.addEventListener("mouseover",()=> showDltBtn(savedInput.taskId));
-    newNote.addEventListener("mouseleave",()=>  dontShowDltBtn(savedInput.taskId));
+    newNote.addEventListener("mouseover", () => showDltBtn(savedInput.taskId));
+    newNote.addEventListener("mouseleave", () => dontShowDltBtn(savedInput.taskId));
     notesContainer.appendChild(newNote);
 
     var deleteIcon = document.createElement("button");
@@ -89,6 +92,9 @@ function createNote(savedInput) {
     taskTitle.setAttribute("class", "taskTitle");
     taskTitle.innerText = savedInput.taskName;
     newNote.append(taskTitle);
+
+    let titleAndDltBtnDiv = document.createElement("div");
+    newNote.append(titleAndDltBtnDiv);
 
     var taskDetail = document.createElement("p");
     taskDetail.setAttribute("id", "deatails");
@@ -124,6 +130,7 @@ function deleteNote(deleteTask) {
     const id = deleteTask.parentNode.getAttribute("id");
     deleteTask.parentNode.remove();
     console.log(id);
+    console.log(deleteTask.parentNode);
     const updatedNotes = currentNotes.filter((note) => {
         return `${note.taskId}` !== id;
     })
